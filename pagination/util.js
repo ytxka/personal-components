@@ -1,5 +1,5 @@
 function Pagination(root, config) {
-    this.currPage = 1; // 当前页码
+    this.currPage = 2; // 当前页码
     this.pageSize = config.pageSize || 10; // 分页大小（每页条数）
     this.totalCount = config.totalCount || 0; // 总条数
     this.preText = config.preText || '<';
@@ -15,11 +15,8 @@ function Pagination(root, config) {
         // 页码容器
         this.wrap.innerHTML += '<div class="pageNum-wrap" id="pageNumWrap"></div>'
         this.pageNumWrap = document.getElementById("pageNumWrap");
-        // 页码
-        this.pageNumWrap.innerHTML += '<div class="pagination-item pageNum" key="1">1</div>'
-        for(let i = 1; i < this.totalPage; i++) {
-            this.pageNumWrap.innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
-        }
+        // 渲染页码
+        this.isShowMorePage();
         // 下一页
         this.wrap.innerHTML += `<div class="pagination-item next" id="nextPage">${this.nextText}</div>`;
         // 分页大小选择框
@@ -46,20 +43,54 @@ function Pagination(root, config) {
         this.initEvent();
     }
 
-    // 重新渲染页码
+    // 显示元素
+    this.showItem = (ele) => {
+        ele.style.display = 'block';
+    }
+
+    // 隐藏元素
+    this.hideItem = (ele) => {
+        ele.style.display = 'none';
+    }
+
+    // 分页大小改变时，重新渲染页码
     this.reDrawNum = () => {
         this.totalPage = Math.ceil(this.totalCount / this.pageSize);
         this.wrap.children[2].innerHTML = ''
         this.pageNumWrap.innerHTML = '';
-        this.pageNumWrap.innerHTML += '<div class="pagination-item pageNum active" key="1">1</div>'
-        
-        for(let i = 1; i < this.totalPage; i++) {
-            this.pageNumWrap.innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
-        }
-        this.wrap.children[2].innerHTML = this.pageNumWrap.innerHTML;
+        this.isShowMorePage();
         this.isDisabledPre();
         this.isDisabledNext();
         this.initEvent();
+    }
+
+    // 页数大于10时，显示为更多分页样式，否则显示为基础样式
+    this.isShowMorePage = () => {
+        this.wrap.children[2].innerHTML += '<div class="pagination-item pageNum active" key="1">1</div>'
+        this.wrap.children[2].innerHTML += '<div class="pagination-item more-page more-page-left" id="pointLeft">···</div>'
+        let pointLeft = document.getElementById("pointLeft");
+        console.log(this.wrap);
+        
+        if(this.totalPage <= 10) {
+            for(let i = 1; i < this.totalPage; i++) {
+                this.wrap.children[2].innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
+            }
+        } else {
+            // 不显示左边的点
+            if(this.currPage < 5) {
+                this.hideItem(pointLeft);
+                for(let i = 1; i < 7; i++) {
+                    this.wrap.children[2].innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
+                }
+            } else { // 显示左边的点
+                this.showItem(pointLeft);
+                for(let i = this.currPage - 2; i <= this.currPage + 2; i++) {
+                    this.wrap.children[2].innerHTML += `<div class="pagination-item pageNum" key=${i}>${i}</div>`
+                }
+            }
+            this.wrap.children[2].innerHTML += '<div class="pagination-item more-page">···</div>'
+            this.wrap.children[2].innerHTML += `<div class="pagination-item pageNum" key=${this.totalPage}>${this.totalPage}</div>`
+        }
     }
 
     // 是否禁用pre-btn
