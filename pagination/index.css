@@ -5,7 +5,7 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    padding: 10%;
+    padding: 10% 0;
     box-sizing: border-box;
 }
 
@@ -14,8 +14,12 @@
     height: 40px;
 }
 
+.pageNum-wrap {
+    display: flex;
+}
+
 .pagination-item {
-    margin-left: 5px;
+    margin-left: 4px;
     width: 43px;
     height: 100%;
     box-sizing: border-box;
@@ -23,8 +27,19 @@
     line-height: 38px;
     cursor: pointer;
     border: 1px solid rgb(201, 198, 198);
+    box-shadow: 2px 2px 5px #eee;
     border-radius: 5px;
     user-select: none;
+}
+
+.pre, .next {
+    padding: 0 5px;
+    min-width: 43px;
+    width: fit-content;
+}
+
+.pageNum:hover {
+    border: 1px solid rgb(44, 168, 190);
 }
 
 .sum {
@@ -32,8 +47,17 @@
     line-height: 40px;
 }
 
+.select-page-size {
+    margin-left: 20px;
+    height: 100%;
+    width: 60px;
+    text-align: center;
+    border: 1px solid rgb(201, 198, 198);
+    background: #fff;
+}
+
 .active {
-    border: 1px solid rgb(238, 82, 20);
+    border: 1px solid rgb(44, 168, 190);
 }
 
 .disabled {

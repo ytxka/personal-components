@@ -1,23 +1,38 @@
 function Pagination(root, config) {
-    this.currPage = 5; // 当前页码
+    this.currPage = 1; // 当前页码
     this.pageSize = config.pageSize || 10; // 分页大小（每页条数）
     this.totalCount = config.totalCount || 0; // 总条数
     this.preText = config.preText || '<';
     this.nextText = config.nextText || '>';
     this.totalPage = Math.ceil(this.totalCount / this.pageSize);
-
     
-    // 页面初始化
     this.initPage = () => {
-        let wrap = document.getElementById(root);
-        wrap.innerHTML += `<div class="sum">总条数：${this.totalCount}</div>`
-        wrap.innerHTML += `<div class="pagination-item pre" id="prePage">${this.preText}</div>`;
-        wrap.innerHTML += '<div class="pagination-item pageNum" key="1">1</div>'
+        this.wrap = document.getElementById(root);
+        this.wrap.innerHTML = '';
+        this.wrap.innerHTML += `<div class="sum">总条数：${this.totalCount}</div>`;
+        // 上一页
+        this.wrap.innerHTML += `<div class="pagination-item pre" id="prePage">${this.preText}</div>`;
+        // 页码容器
+        this.wrap.innerHTML += '<div class="pageNum-wrap" id="pageNumWrap"></div>'
+        this.pageNumWrap = document.getElementById("pageNumWrap");
+        // 页码
+        this.pageNumWrap.innerHTML += '<div class="pagination-item pageNum" key="1">1</div>'
         for(let i = 1; i < this.totalPage; i++) {
-            wrap.innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
+            this.pageNumWrap.innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
         }
-        wrap.innerHTML += `<div class="pagination-item next" id="nextPage">${this.nextText}</div>`;
-       
+        // 下一页
+        this.wrap.innerHTML += `<div class="pagination-item next" id="nextPage">${this.nextText}</div>`;
+        // 分页大小选择框
+        this.wrap.innerHTML +=
+            `<div class="select-wrap">
+                <select class="select-page-size" id="selectSize">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                </select>
+                条/页
+            </div>`
+
         this.preDom = document.getElementById('prePage');
         this.nextDom = document.getElementById('nextPage'); 
         this.pageNumsDom = document.getElementsByClassName('pageNum');
@@ -25,6 +40,23 @@ function Pagination(root, config) {
         this.totalPage !== 0 ? 
             this.pageNumsDom[this.currPage - 1].classList.add('active')
             : this.pageNumsDom[0].classList.add('active')
+        this.selectSizeDom = document.getElementById("selectSize");
+        this.isDisabledPre();
+        this.isDisabledNext();
+        this.initEvent();
+    }
+
+    // 重新渲染页码
+    this.reDrawNum = () => {
+        this.totalPage = Math.ceil(this.totalCount / this.pageSize);
+        this.wrap.children[2].innerHTML = ''
+        this.pageNumWrap.innerHTML = '';
+        this.pageNumWrap.innerHTML += '<div class="pagination-item pageNum active" key="1">1</div>'
+        
+        for(let i = 1; i < this.totalPage; i++) {
+            this.pageNumWrap.innerHTML += `<div class="pagination-item pageNum" key=${i+1}>${i+1}</div>`
+        }
+        this.wrap.children[2].innerHTML = this.pageNumWrap.innerHTML;
         this.isDisabledPre();
         this.isDisabledNext();
         this.initEvent();
@@ -48,7 +80,6 @@ function Pagination(root, config) {
 
     // 上一页
     this.handleClickPre = () =>{
-        console.log('pre');
         // 启用next-btn
         if (this.currPage === this.totalPage) {
             this.nextDom.classList.remove('disabled');
@@ -61,7 +92,6 @@ function Pagination(root, config) {
 
     // 下一页
     this.handleClickNext = () => {
-        console.log('next');
         // 启用pre-btn
         if (this.currPage === 1) {
             this.preDom.classList.remove('disabled');
@@ -87,9 +117,14 @@ function Pagination(root, config) {
         this.isDisabledNext();
     }
 
+    // 分页大小改变
+    this.handlePageSizeChange = (e) => {
+        this.pageSize = e.target.value;
+        this.reDrawNum();
+    }
+
     // 事件监听
     this.initEvent = () => {
-
         // 上一页
         this.preDom.addEventListener('click', () => {
             if (this.currPage === 1 || this.totalPage === 0) { // 不存在上一页
@@ -118,5 +153,8 @@ function Pagination(root, config) {
                 }
             })
         }
+
+        // 分页大小
+        this.selectSizeDom.onchange = this.handlePageSizeChange;
     }
 }
