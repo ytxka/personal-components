@@ -51,6 +51,8 @@
     margin-left: 20px;
     height: 100%;
     width: 60px;
+    /* 去掉点击时的蓝色边框 */
+    outline: none;
     text-align: center;
     border: 1px solid rgb(201, 198, 198);
     background: #fff;
