@@ -6,6 +6,7 @@ function Pagination(root, config) {
     this.nextText = config.nextText || '>';
     this.totalPage = Math.ceil(this.totalCount / this.pageSize);
     
+    // 页面逐渐复杂，不能只在wrap上添加html，应该将dom抽离出来，使结构清晰。并且只在一处渲染dom
     this.initPage = () => {
         this.wrap = document.getElementById(root);
         this.wrap.innerHTML = '';
