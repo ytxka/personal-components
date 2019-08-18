@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+h2 {
+    color: #383737;
+
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:30px;
+}
+
+ol, a, a:visited {
+    color: #2c8ab7;
+}
+
+li {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+a {
+    padding: 5px;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(102, 176, 206);
+}
