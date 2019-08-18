@@ -3,7 +3,7 @@
  * 事件绑定时使用的是id标识，因此使用时页面中只能存在1个分页器，否则无法正确渲染
  */
 function Pagination(root, config) {
-    this.currPage = 5;
+    this.currPage = 1;
     this.pageSize = config.pageSize || 10;
     this.totalCount = config.totalCount || 0;
     this.preText = config.preText || '<';
