@@ -1,0 +1,62 @@
+.pagination {
+    display: flex;
+    height: 40px;
+}
+
+.page-num-wrap {
+    display: flex;
+}
+
+.pagination-item {
+    margin-left: 4px;
+    width: 43px;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 38px;
+    cursor: pointer;
+    border: 1px solid rgb(201, 198, 198);
+    border-radius: 4px;
+    user-select: none;
+}
+
+.ellipsis {
+    cursor: auto;
+    border: none;
+}
+
+.pre, .next {
+    padding: 0 5px;
+    min-width: 43px;
+    width: fit-content;
+}
+
+.page-num:hover {
+    border: 1px solid rgb(44, 168, 190);
+}
+
+.text-total {
+    margin-right: 5px;
+    line-height: 40px;
+}
+
+.select-page-size {
+    margin-left: 20px;
+    height: 100%;
+    min-width: 70px;
+    /* 去掉点击时的蓝色边框 */
+    outline: none;
+    text-align: center;
+    letter-spacing: 1px;
+    border: 1px solid rgb(201, 198, 198);
+    background: #fff;
+}
+
+.active {
+    border: 1px solid rgb(44, 168, 190);
+}
+
+.disabled {
+    color: rgb(201, 198, 198);
+    cursor: not-allowed;
+}

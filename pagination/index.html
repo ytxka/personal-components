@@ -6,18 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>分页器</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./pagination.css">
 </head>
 <body>
 <div class="main">
     <div class="pagination" id="pagination"></div>
 </div>
-<script src="./util.js"></script>
+
+
+<script src="./pagination.js"></script>
 <script>
 const PAGE_CONFIG = {
     pageSize: 10,
-    totalCount: 150,
+    totalCount: 110,
+    isShowFirstAndLast: true,
+    isShowEllpsis: true,
+    isShowSelectPageSize: true,
+    isShowTotal: true,
 }
-let pagination = new Pagination('pagination', PAGE_CONFIG)
+
+let pagination = new Pagination('pagination', PAGE_CONFIG);
 pagination.initPage()
 </script>
 
