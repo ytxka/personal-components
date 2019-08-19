@@ -187,7 +187,7 @@ function Pagination(root, config) {
             if(id.match(/num/)) {
                 let oldPage = this.currPage;
                 let newPage = Number(id.replace('num', ''));
-                if(this.isShowEllpsis && isNeedEllipsis() && this.currPage >= 4) {
+                if(this.isShowEllpsis && isNeedEllipsis()) {
                     this.currPage = newPage;
                     drawEllipsisNum();
                     changeActiveStyle(oldPage, newPage);
@@ -226,7 +226,7 @@ function Pagination(root, config) {
                     break;
                 case 'nextPage':
                     newPage = this.currPage !== this.totalPage ? this.currPage + 1 : this.totalPage;
-                    if(this.isShowEllpsis && isNeedEllipsis() && this.currPage >= 4) {
+                    if(this.isShowEllpsis && isNeedEllipsis()) {
                         this.currPage = newPage;
                         drawEllipsisNum();
                         changeActiveStyle(oldPage, newPage);
