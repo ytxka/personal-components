@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双向绑定</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="main">
+        <h3>双向绑定模拟实现，在下面的输入框中输点东西试试吧 ：D</h3>
+        <input type="text" placeholder="请输入..." id="inputWrap" model="userInput">
+        <div class="user-input" >
+            您输入的是：
+            <div id="showWrap"></div>
+        </div> 
+    </div>
+</body>
+<script src="./two-way-binding.js"></script>
+<script src="./index.js"></script>
+</html>

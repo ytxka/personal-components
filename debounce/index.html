@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖</title>
+  <link rel="stylesheet" href="../assets/css/common.css">
+  <style>
+    .count-wrap {
+      margin: 30px 0;
+      width: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #000;
+      background: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <h3>若持续触发事件，则事件只会在停止触发n（此处为2）秒后被执行一次</h3>
+    <div class="count-wrap" id="countWrap">0
+    </div>
+    <button class="common-btn" id="btn">click me</button>
+
+  </div>
+</body>
+<script src="../assets/js/utils.js"></script>
+<script>
+  const handleClick = (el) => {
+    el.innerHTML = Number(el.innerHTML) + 1
+  }
+
+  const BTN = getEleById('btn')
+  const WRAP = getEleById('countWrap')
+
+  BTN.addEventListener('click', debounce(() => (handleClick(WRAP)), 2000))
+</script>
+
+</html>

@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.yt-cascader-picker {
+    position: relative;
+    display: inline-block;
+    min-width: 100px;
+    height: 30px;
+    border: 1px solid rgb(179, 177, 177);
+}
+
+.yt-cascader-input {
+    display: inline-block;
+    padding: 5px 8px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
+.icon-down {
+    font-size: 14px;
+    color: rgb(179, 177, 177);
+}
+
+.yt-cascader-arrow {
+    position: absolute;
+    right: 8px;
+    top: 5px;
+}
+
+.yt-cascader-menu-wrap {
+    position: absolute;
+    top: 35px;
+    display: flex;
+    display: none;
+}
+
+.yt-cascader-menu {
+    min-height: 120px;
+    min-width: 80px;
+    border: 1px solid rgb(179, 177, 177);
+}

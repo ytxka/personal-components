@@ -1,0 +1,14 @@
+input {
+    width: 200px;
+    height: 40px;
+    padding: 5px 8px;
+    outline: none;
+}
+
+.user-input {
+    margin-top: 30px;
+}
+
+#showWrap {
+    margin-top: 10px; 
+}
