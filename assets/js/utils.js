@@ -6,6 +6,11 @@ function getEleByClassName(className) {
   return document.getElementsByClassName(className)
 }
 
+// return flag instead if val is empty(means in emptyList).
+function formatEmptyData(val, flag) {
+  const emptyList = [null, undefined, '']
+  return emptyList.indexOf(val) >= 0 ? val : flag
+}
 /**
  * Execute function 'fn' only once during 'wait' seconds, no matter how many times it is triggered.
  * @param {*} fn Function name that want to be process.
